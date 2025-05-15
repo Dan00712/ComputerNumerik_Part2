@@ -2,6 +2,7 @@ import matplotlib.pyplot as plt
 from TP2.lagrange import *
 import TP2.poly as chp
 import numpy as np
+import scipy.special as sci_sp
 
 def generate_plot(f, c_poly, N, fname):
     #calculate reference data
@@ -32,13 +33,13 @@ def generate_plot(f, c_poly, N, fname):
     ax1.legend()
     ax1.plot(Xc, Ylap, label="Lagrange Interpolation")
     ax1.plot(Xc, Ylap2, label="Lagrange Interpolation | Cheberchev Knoten")
-    #ax1.plot(Xc, Y_cheb, label="Cheberchev Polynome")
+    ax1.plot(Xc, Y_cheb, label="Cheberchev Polynome")
 
     ax2.set_xlabel("$x$")
     ax2.set_ylabel("relative error")
     ax2.plot(Xc, (Yref - Ylap)/Yref, label="Lagrange Interpolation")
     ax2.plot(Xc, (Yref -Ylap2)/Yref, label="Lagrange Interpolation | Cheberchev Knoten")
-    #ax2.plot(Xc, (Yref - Y_cheb)/Yref, label="Cheberchev Polynome")
+    ax2.plot(Xc, (Yref - Y_cheb)/Yref, label="Cheberchev Polynome")
 
     plt.savefig(fname)
 
@@ -48,4 +49,16 @@ generate_plot(
     chp.sinpih,
     13,
     "plots/sinpi.pdf"
+)
+generate_plot(
+    np.arctan,
+    chp.arctan,
+    15,
+    "plots/arctan.pdf"
+)
+generate_plot(
+    lambda x: sci_sp.gamma(x+1),
+    chp.gammap1,
+    15,
+    "plots/gamma.pdf"
 )
