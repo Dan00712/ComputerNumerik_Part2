@@ -18,7 +18,7 @@ def generate_plot(f, c_poly, N, fname, start=0, end=1, cheberchev=True):
     F2 = L_interpolate(X_c, Y_c) 
 
     # higher resolution for plot
-    Xc = np.linspace(start, end, N)
+    Xc = np.linspace(start, end, N*10)
 
     # calc test polynomials
     Yref = f(Xc)
@@ -29,7 +29,7 @@ def generate_plot(f, c_poly, N, fname, start=0, end=1, cheberchev=True):
     fig, (ax1, ax2) = plt.subplots(2,1)
 
     ax1.set_ylabel("$\sin(\pi/2 \cdot x)$")
-    ax1.scatter(Xc, Yref)
+    ax1.scatter(X, Yint)
     ax1.plot(Xc, Ylap, label="Lagrange Interpolation")
     ax1.plot(Xc, Ylap2, label="Lagrange Interpolation | Cheberchev Knoten")
     if cheberchev:
@@ -57,7 +57,7 @@ generate_plot(
     chp.arctan,
     15,
     "plots/arctan.pdf",
-    cheberchev=False
+    #    cheberchev=False
 )
 generate_plot(
     lambda x: sci_sp.gamma(x+1),
