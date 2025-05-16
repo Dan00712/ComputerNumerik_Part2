@@ -4,9 +4,9 @@ import TP2.poly as chp
 import numpy as np
 import scipy.special as sci_sp
 
-def generate_plot(f, c_poly, N, fname):
+def generate_plot(f, c_poly, N, fname, start=0, end=1, cheberchev=True):
     #calculate reference data
-    X = np.linspace(0, 1, N)
+    X = np.linspace(start, end, N)
     Yint = f(X)
 
     # for cheberchev nodes
@@ -18,7 +18,7 @@ def generate_plot(f, c_poly, N, fname):
     F2 = L_interpolate(X_c, Y_c) 
 
     # higher resolution for plot
-    Xc = np.linspace(0, 1, N)
+    Xc = np.linspace(start, end, N)
 
     # calc test polynomials
     Yref = f(Xc)
@@ -30,17 +30,19 @@ def generate_plot(f, c_poly, N, fname):
 
     ax1.set_ylabel("$\sin(\pi/2 \cdot x)$")
     ax1.scatter(Xc, Yref)
-    ax1.legend()
     ax1.plot(Xc, Ylap, label="Lagrange Interpolation")
     ax1.plot(Xc, Ylap2, label="Lagrange Interpolation | Cheberchev Knoten")
-    ax1.plot(Xc, Y_cheb, label="Cheberchev Polynome")
+    if cheberchev:
+        ax1.plot(Xc, Y_cheb, label="Cheberchev Polynome")
 
     ax2.set_xlabel("$x$")
     ax2.set_ylabel("relative error")
     ax2.plot(Xc, (Yref - Ylap)/Yref, label="Lagrange Interpolation")
     ax2.plot(Xc, (Yref -Ylap2)/Yref, label="Lagrange Interpolation | Cheberchev Knoten")
-    ax2.plot(Xc, (Yref - Y_cheb)/Yref, label="Cheberchev Polynome")
+    if cheberchev:
+        ax2.plot(Xc, (Yref - Y_cheb)/Yref, label="Cheberchev Polynome")
 
+    ax1.legend()
     plt.savefig(fname)
 
 
@@ -54,7 +56,8 @@ generate_plot(
     np.arctan,
     chp.arctan,
     15,
-    "plots/arctan.pdf"
+    "plots/arctan.pdf",
+    cheberchev=False
 )
 generate_plot(
     lambda x: sci_sp.gamma(x+1),
