@@ -1,3 +1,4 @@
+from pathlib import Path
 import matplotlib.pyplot as plt
 from TP2.lagrange import *
 import TP2.poly as chp
@@ -46,28 +47,33 @@ def generate_plot(f, c_poly, N, fname, ylabel="", start=-1, end=1, cheberchev=Tr
 
     ax1.legend()
     print(fname)
-    plt.savefig(fname)
+    plt.savefig(Path('plots/')/(fname+'.pdf'))
+    with (Path('data/')/(fname+'.csv')).open('w') as f:
+        print(r'Interpolation Method, $||\Delta y_i||_{\infty}$', file=f)
+        print(f'Lagrange, {((Yref -Ylap)/Yref).max()}', file=f)
+        print(f'Lagrange (Tcheberchev Knoten), {((Yref -Ylap2)/Yref).max()}', file=f)
+        print(f'Chebychev Polynome, {((Yref -Y_cheb)/Yref).max()}', file=f)
 
 
 generate_plot(
     lambda x: np.sin(np.pi/2 *x),
     chp.sinpih,
     13,
-    "plots/sinpi.pdf",
+    "sinpi",
     r"$sin(\pi/2 \cdot x )$"
 )
 generate_plot(
     np.arctan,
     chp.arctan,
     15,
-    "plots/arctan.pdf",
+    "arctan",
     r"$arctan(x)$"
 )
 generate_plot(
     lambda x: sci_sp.gamma(x+1),
     chp.gammap1,
     15,
-    "plots/gamma.pdf",
+    "gamma",
     r"$\Gamma(x+1) = x!$",
     start=0,
     end=1
