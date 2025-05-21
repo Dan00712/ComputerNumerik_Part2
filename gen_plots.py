@@ -31,17 +31,17 @@ def generate_plot(f, c_poly, N, fname, ylabel="", start=-1, end=1, cheberchev=Tr
 
     ax1.set_ylabel(ylabel)
     ax1.scatter(X, Yint, label="Lineare Punkte")
-    ax1.scatter(X_c, Y_c, label="Cheberchev Knoten")
-    ax1.legend()
+    ax1.scatter(X_c, Y_c, label="Chebychev Knoten")
     ax1.plot(Xc, Ylap, label="Lagrange Interpolation")
-    ax1.plot(Xc, Ylap2, label="Lagrange Interpolation | Cheberchev Knoten")
+    ax1.plot(Xc, Ylap2, label="Lagrange Interpolation | Chebychev Knoten")
+    ax1.legend(fontsize='x-small')
     if cheberchev:
         ax1.plot(Xc, Y_cheb, label="Cheberchev Polynome")
 
     ax2.set_xlabel("$x$")
     ax2.set_ylabel("relative error")
-    ax2.plot(Xc, (Yref - Ylap)/Yref, label="Lagrange Interpolation")
-    ax2.plot(Xc, (Yref -Ylap2)/Yref, label="Lagrange Interpolation | Cheberchev Knoten")
+    ax2.plot(Xc, (Yref - Ylap)/Yref, label="Lagrange")
+    ax2.plot(Xc, (Yref -Ylap2)/Yref, label="Lagrange| Chebychev Knoten")
     if cheberchev:
         ax2.plot(Xc, (Yref - Y_cheb)/Yref, label="Cheberchev Polynome")
 
