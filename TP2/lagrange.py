@@ -1,4 +1,4 @@
-
+import numpy as np
 
 def L_i(X, yi, i):
     def f(x):
@@ -19,3 +19,15 @@ def L_interpolate(X, Y):
         return acc
     return f
 
+def LagrangeInterpolate_lin(f, N:int, start=-1, end=1):
+    X = np.linspace(start, end, N)
+    Y = f(X)
+
+    return L_interpolate(X, Y)
+
+def LagrangeInterpolate_cheb(f, N:int, start=-1, end=1):
+    X = (start+end)/2 + (end -start)/2*np.cos(np.array([np.pi/N * j for j in range(N+1)]))
+
+    Y = f(X)
+
+    return L_interpolate(X, Y)
