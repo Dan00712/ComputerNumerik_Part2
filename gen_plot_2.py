@@ -31,7 +31,7 @@ def gen_plot(f, chf, name, n, start=-1, end=1):
     fig.savefig(PLOTD/(name + ".2.pdf"))
 
 def get_errrs(X, f, F):
-    return (f(X) - F(X))/f(X)
+    return (f(X) - F(X))
 
 gen_plot(lambda x: np.sin(np.pi/2 * x), chbp.sinpih ,"sinph", n=9)
 gen_plot(np.atan, chbp.arctan, "atan", n=15)
