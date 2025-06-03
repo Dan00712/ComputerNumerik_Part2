@@ -24,9 +24,13 @@ def generate_plots(f, name, start=-1, end=1):
     ax.set_ylabel('maximaler Relativer Fehler')
     ax.set_xlabel('Interpolationsgrad')
     ax.plot(N, err1,
-            label="Lineare Punkte")
+            label="Lineare Punkte",
+            linestyle="solid"
+            )
     ax.plot(N, err2,
-            label="Chebychev Knoten")
+            label="Chebychev Knoten",
+            linestyle="dashed"
+            )
     ax.legend()
     fig.savefig(PLOTD/(name+".1.pdf"))
 

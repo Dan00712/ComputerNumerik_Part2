@@ -21,12 +21,12 @@ def gen_plot(f, chf, name, n, start=-1, end=1):
     fig, (ax1, ax2) = plt.subplots(2, 1)
 
     ax1.plot(X, f(X))
-    ax1.plot(X, F(X), color="orange", label="Lagrange Interpolation")
-    ax1.plot(X, chf(X), color="green", label="Chebychev Knoten")
+    ax1.plot(X, F(X), color="orange", label="Interpolierende", linestyle="solid")
+    ax1.plot(X, chf(X), color="green", label="Bestapproximierende", linestyle="dashed")
     ax1.legend()
     
-    ax2.plot(X, err1, color="orange")
-    ax2.plot(X, err2, color="green")
+    ax2.plot(X, err1, color="orange", linestyle="solid")
+    ax2.plot(X, err2, color="green", linestyle="dashed")
 
     fig.savefig(PLOTD/(name + ".2.pdf"))
 
